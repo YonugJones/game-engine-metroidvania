@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { GameLoop } from './engine/GameLoop'
 import { InputManager } from './engine/InputManager'
 import { Player } from './game/Player'
+import { Platform } from './game/Platform'
 
 export const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -13,18 +14,25 @@ export const App = () => {
     if (!ctx) return
 
     const input = new InputManager()
-    const player = new Player(400, 200)
+    const player = new Player(100, 100)
+
+    const platforms = [
+      new Platform(0, 410, 800, 40),
+      new Platform(150, 300, 200, 20),
+      new Platform(450, 220, 200, 20),
+    ]
 
     const loop = new GameLoop(
       // onUpdate
       (dt) => {
-        player.update(dt, input, canvas.height)
+        player.update(dt, input, platforms)
         input.flush()
       },
       // onRender
       () => {
         ctx.fillStyle = '#1a1a2e' // background
         ctx.fillRect(0, 0, canvas.width, canvas.height) // background
+        platforms.forEach((p) => p.draw(ctx))
         player.draw(ctx)
       },
     )
