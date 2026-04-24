@@ -18,7 +18,7 @@ export const App = () => {
     const loop = new GameLoop(
       // onUpdate
       (dt) => {
-        player.update(dt, input)
+        player.update(dt, input, canvas.height)
         input.flush()
       },
       // onRender
