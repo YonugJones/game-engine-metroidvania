@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { GameLoop } from './engine/GameLoop'
 import { InputManager } from './engine/InputManager'
+import { Player } from './game/Player'
 
 export const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -12,25 +13,19 @@ export const App = () => {
     if (!ctx) return
 
     const input = new InputManager()
-    let x = 400
-    let y = 200
+    const player = new Player(400, 200)
 
     const loop = new GameLoop(
       // onUpdate
       (dt) => {
-        if (input.isDown('KeyD')) x += 200 * dt
-        if (input.isDown('KeyA')) x -= 200 * dt
-        if (input.isDown('KeyS')) y += 200 * dt
-        if (input.isDown('KeyW')) y -= 200 * dt
+        player.update(dt, input)
         input.flush()
       },
-
       // onRender
       () => {
-        ctx.fillStyle = '#1a1a2e'
-        ctx.fillRect(0, 0, canvas.width, canvas.height)
-        ctx.fillStyle = '#e94560'
-        ctx.fillRect(x, y, 60, 60)
+        ctx.fillStyle = '#1a1a2e' // background
+        ctx.fillRect(0, 0, canvas.width, canvas.height) // background
+        player.draw(ctx)
       },
     )
 
