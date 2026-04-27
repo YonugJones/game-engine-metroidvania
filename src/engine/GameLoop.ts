@@ -1,3 +1,5 @@
+// The heartbeat
+
 export class GameLoop {
   private rafId: number = 0
   private lastTime: number = 0

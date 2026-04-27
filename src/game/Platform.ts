@@ -1,3 +1,5 @@
+// Static world geometry
+
 export class Platform {
   x: number
   y: number

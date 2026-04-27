@@ -1,3 +1,5 @@
+// Keyboard state
+
 export class InputManager {
   private held = new Set<string>()
   private pressedThisFrame = new Set<string>()

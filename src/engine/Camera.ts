@@ -1,3 +1,4 @@
+// world -> screen transform
 // Lerp - linear interpolation - smoothly moving a value towards a target
 // camera.x += (target.x - camera.x) * speed * dt
 
