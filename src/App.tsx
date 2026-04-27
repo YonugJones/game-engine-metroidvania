@@ -13,7 +13,7 @@ export const App = () => {
     if (!ctx) return
 
     const input = new InputManager()
-    const scene = new Scene()
+    const scene = new Scene(canvas.width, canvas.height)
 
     const loop = new GameLoop(
       // onUpdate
